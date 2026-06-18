@@ -42,7 +42,7 @@ const Navbar = () => {
   const currentLogo = mounted && theme === "dark" ? logoDark : logoLight;
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-white/70 dark:bg-[#124170]/70 backdrop-blur-md transition-all duration-300">
+    <nav className="sticky top-0 z-50 w-full bg-white/70 dark:bg-[#124170]/70 backdrop-blur-md transition-all duration-300 border-b">
       <div className="mx-auto container h-20 flex items-center justify-between px-6">
         {/* Logo Section */}
         <Link
