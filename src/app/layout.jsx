@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import NextThemeProvider from "@/providers/NextThemeProvider";
 import Footer from "@/components/Footer";
+import ScrollProvider from "@/providers/ScrollProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +27,14 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen  flex flex-col ">
         <NextThemeProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <ScrollProvider>
+            <Navbar />
+
+            <main className="flex-grow flex flex-col">{children}</main>
+            <Footer />
+          </ScrollProvider>
         </NextThemeProvider>
       </body>
     </html>
