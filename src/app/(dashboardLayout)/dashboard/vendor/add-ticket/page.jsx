@@ -105,8 +105,8 @@ const AddTicketPage = () => {
   };
 
   return (
-    // Base container matches the NotFound page's background and padding structure
-    <div className="min-h-[85vh] w-full bg-white dark:bg-[#124170] px-6 py-12 relative overflow-hidden transition-colors duration-300">
+    // Base container updated from zinc-950 to a deep custom slate-navy tint
+    <div className="min-h-[85vh] w-full bg-slate-50 dark:bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
       <DashboardHeading
         title="Add Ticket"
         description="List and distribute custom transport or passage tickets."
@@ -115,15 +115,15 @@ const AddTicketPage = () => {
       {/* Main Structural Content Glass Container applied to form wrapper */}
       <div className="mt-8 relative z-10 flex flex-col items-start max-w-4xl mx-auto">
         <Card
-          className="w-full bg-gray-50/50 dark:bg-black/10 backdrop-blur-md rounded-3xl border border-gray-200/40 dark:border-white/5 shadow-xl transition-all duration-300"
+          className="w-full bg-white/70 dark:bg-[#124170]/20 backdrop-blur-xl rounded-3xl border border-zinc-200/60 dark:border-[#1a3d61] shadow-2xl transition-all duration-300"
           radius="lg"
         >
           {/* Card Header matching project title aesthetics */}
-          <CardHeader className="flex flex-col gap-1 pb-4 border-b border-gray-200/40 dark:border-white/5 p-8 select-none">
-            <h3 className="text-2xl font-black uppercase tracking-wider text-[#124170] dark:text-white">
+          <CardHeader className="flex flex-col gap-1 pb-4 border-b border-zinc-200/60 dark:border-[#1a3d61]/60 p-8 select-none">
+            <h3 className="text-2xl font-black uppercase tracking-wider text-[#124170] dark:text-zinc-100">
               Issue Fleet Tickets
             </h3>
-            <p className="text-xs font-semibold leading-relaxed text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs font-semibold leading-relaxed text-zinc-500 dark:text-zinc-400 mt-1">
               Provide travel details, pricing tier brackets, and upload
               promotional display assets. All fields are required.
             </p>
@@ -138,14 +138,14 @@ const AddTicketPage = () => {
               <div className="w-full">
                 <Label
                   htmlFor="title"
-                  className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                  className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                 >
                   Ticket Title
                 </Label>
                 <Input
                   id="title"
                   placeholder="e.g. Dhaka to Cox's Bazar Premium Express"
-                  className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                  className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                   {...register("title", {
                     required: "Ticket title field is required",
                   })}
@@ -162,14 +162,14 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="from"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     From (Departure Origin)
                   </Label>
                   <Input
                     id="from"
                     placeholder="e.g. Dhaka"
-                    className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                    className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                     {...register("from", {
                       required: "Origin location is required",
                     })}
@@ -184,14 +184,14 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="to"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     To (Destination Target)
                   </Label>
                   <Input
                     id="to"
                     placeholder="e.g. Cox's Bazar"
-                    className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                    className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                     {...register("to", {
                       required: "Destination target is required",
                     })}
@@ -209,13 +209,13 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="transportType"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     Transport Type
                   </Label>
                   <select
                     id="transportType"
-                    className="w-full h-10 px-3 rounded-xl bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 text-gray-900 dark:text-slate-200 focus:outline-none focus:border-[#67C090] focus:ring-1 focus:ring-[#67C090] transition-colors text-sm font-semibold cursor-pointer appearance-none"
+                    className="w-full h-10 px-3 rounded-xl bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] text-zinc-900 dark:text-zinc-100 focus:outline-none focus:border-[#67C090] focus:ring-1 focus:ring-[#67C090] transition-colors text-sm font-semibold cursor-pointer appearance-none"
                     {...register("transportType", {
                       required: "Select your transport vessel archetype",
                     })}
@@ -223,7 +223,7 @@ const AddTicketPage = () => {
                     <option
                       value=""
                       disabled
-                      className="bg-white dark:bg-[#124170]"
+                      className="bg-white dark:bg-[#091624] text-zinc-900 dark:text-zinc-100"
                     >
                       Select Type
                     </option>
@@ -231,7 +231,7 @@ const AddTicketPage = () => {
                       <option
                         key={type}
                         value={type}
-                        className="bg-white dark:bg-[#124170] text-gray-900 dark:text-white"
+                        className="bg-white dark:bg-[#091624] text-zinc-900 dark:text-zinc-100"
                       >
                         {type}
                       </option>
@@ -247,14 +247,14 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="departureDateTime"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     Departure Date & Time
                   </Label>
                   <Input
                     id="departureDateTime"
                     type="datetime-local"
-                    className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                    className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                     {...register("departureDateTime", {
                       required: "Specify precise departure timeline",
                     })}
@@ -272,7 +272,7 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="price"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     Price (per unit)
                   </Label>
@@ -280,7 +280,7 @@ const AddTicketPage = () => {
                     id="price"
                     type="number"
                     placeholder="0.00"
-                    className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                    className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                     {...register("price", {
                       required: "Unit price valuation is required",
                       min: {
@@ -299,7 +299,7 @@ const AddTicketPage = () => {
                 <div>
                   <Label
                     htmlFor="quantity"
-                    className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                    className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                   >
                     Ticket Quantity
                   </Label>
@@ -307,7 +307,7 @@ const AddTicketPage = () => {
                     id="quantity"
                     type="number"
                     placeholder="e.g. 40"
-                    className="w-full bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-gray-900 dark:text-white"
+                    className="w-full bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl transition-colors focus-within:!border-[#67C090] text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                     {...register("quantity", {
                       required: "Inventory batch size quantity required",
                       min: {
@@ -324,8 +324,8 @@ const AddTicketPage = () => {
                 </div>
               </div>
 
-              {/* Perks Checklist Arrays (Matches selection styling from previous designs) */}
-              <div className="w-full border-t border-b border-gray-200/40 dark:border-white/5 py-6">
+              {/* Perks Checklist Arrays */}
+              <div className="w-full border-t border-b border-zinc-200/60 dark:border-[#1a3d61]/80 py-6">
                 <Label className="text-sm font-black uppercase tracking-wider text-[#124170] dark:text-[#AAFFC7] block mb-4 select-none">
                   Included Amenities & Perks
                 </Label>
@@ -335,11 +335,11 @@ const AddTicketPage = () => {
                     return (
                       <label
                         key={perk}
-                        className={`flex items-center gap-2 px-4 py-2.5 rounded-full border cursor-pointer transition-all text-xs font-black uppercase tracking-widest shadow-inner select-none
+                        className={`flex items-center gap-2 px-4 py-2.5 rounded-full border cursor-pointer transition-all text-xs font-black uppercase tracking-widest select-none
                           ${
                             isChecked
                               ? "border-[#67C090] bg-[#67C090]/10 text-[#124170] dark:text-[#AAFFC7]"
-                              : "border-gray-200/40 dark:border-white/5 bg-gray-100/80 dark:bg-[#215B63]/20 text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-white/10"
+                              : "border-zinc-200/60 dark:border-[#1a3d61] bg-zinc-50 dark:bg-[#0b1d30]/50 text-zinc-500 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-[#1a3d61]"
                           }`}
                       >
                         <input
@@ -355,13 +355,13 @@ const AddTicketPage = () => {
                             ${
                               isChecked
                                 ? "border-[#67C090] bg-[#67C090]"
-                                : "border-gray-300 dark:border-white/20 bg-white/60"
+                                : "border-zinc-300 dark:border-[#1a3d61] bg-white dark:bg-[#0b1d30]"
                             }`}
                         >
                           {isChecked && (
                             <svg
                               viewBox="0 0 10 8"
-                              className="w-2 h-2 fill-none stroke-[#AAFFC7]"
+                              className="w-2 h-2 fill-none stroke-white dark:stroke-[#124170]"
                               strokeWidth="2.5"
                               strokeLinecap="round"
                             >
@@ -380,7 +380,7 @@ const AddTicketPage = () => {
               <div className="w-full py-2">
                 <Label
                   htmlFor="ticketImage"
-                  className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5 block select-none"
+                  className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
                 >
                   Ticket Promotional Display Banner Image
                 </Label>
@@ -388,7 +388,7 @@ const AddTicketPage = () => {
                   id="ticketImage"
                   type="file"
                   accept="image/*"
-                  className="w-full h-15 bg-gray-100/60 dark:bg-black/20 border border-gray-200/40 dark:border-white/5 rounded-xl focus-within:!border-[#67C090] text-gray-600 dark:text-gray-300 font-semibold file:text-[#124170] dark:file:text-[#AAFFC7] file:font-black file:uppercase file:text-xs file:tracking-wider file:bg-[#124170]/10 dark:file:bg-[#AAFFC7]/10 file:border-0 file:rounded-xl file:px-4 file:h-8 file:mt-1.5 file:cursor-pointer transition-colors"
+                  className="w-full h-15 bg-zinc-100/80 dark:bg-[#0b1d30]/80 border border-gray-300 dark:border-[#1B3C61] rounded-xl focus-within:!border-[#67C090] text-zinc-600 dark:text-zinc-300 font-semibold file:text-[#124170] dark:file:text-[#AAFFC7] file:font-black file:uppercase file:text-xs file:tracking-wider file:bg-[#124170]/10 dark:file:bg-[#AAFFC7]/10 file:border-0 file:rounded-xl file:px-4 file:h-8 file:mt-1.5 file:cursor-pointer transition-colors"
                   {...register("ticketImage", {
                     required:
                       "Display target promotional graphic asset required",
@@ -401,36 +401,36 @@ const AddTicketPage = () => {
                 )}
               </div>
 
-              {/* Readonly Vendor Verification Coordinates (styled with project color mapping) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full bg-gray-100/60 dark:bg-black/20 p-6 rounded-2xl border border-gray-200/40 dark:border-white/5 mt-4 select-none">
+              {/* Readonly Vendor Verification Coordinates */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full bg-zinc-50 dark:bg-[#124170]/10 p-6 rounded-2xl border border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4 select-none">
                 <div>
-                  <Label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 tracking-wide uppercase block mb-1">
+                  <Label className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 tracking-wide uppercase block mb-1">
                     Vendor Name (Readonly)
                   </Label>
                   <input
                     value={session?.user?.name || "Authenticating..."}
                     readOnly
-                    className="w-full h-10 px-4 rounded-xl bg-gray-200/50 dark:bg-[#124170]/40 border border-gray-300 dark:border-[#AAFFC7]/10 text-[#124170] dark:text-[#AAFFC7] text-sm font-semibold opacity-70 cursor-not-allowed focus:outline-none transition-colors"
+                    className="w-full h-10 px-4 rounded-xl bg-zinc-200/50 dark:bg-[#0b1d30]/60 border border-gray-300 dark:border-[#1B3C61] text-[#124170] dark:text-zinc-300 text-sm font-semibold opacity-70 cursor-not-allowed focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <Label className="text-[10px] font-bold text-gray-400 dark:text-gray-500 tracking-wide uppercase block mb-1">
+                  <Label className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 tracking-wide uppercase block mb-1">
                     Vendor Email Profile (Readonly)
                   </Label>
                   <input
                     value={session?.user?.email || "Authenticating..."}
                     readOnly
-                    className="w-full h-10 px-4 rounded-xl bg-gray-200/50 dark:bg-[#124170]/40 border border-gray-300 dark:border-[#AAFFC7]/10 text-[#124170] dark:text-[#AAFFC7] text-sm font-semibold opacity-70 cursor-not-allowed focus:outline-none transition-colors"
+                    className="w-full h-10 px-4 rounded-xl bg-zinc-200/50 dark:bg-[#0b1d30]/60 border border-gray-300 dark:border-[#1B3C61] text-[#124170] dark:text-zinc-300 text-sm font-semibold opacity-70 cursor-not-allowed focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
-              {/* CTA Action Submission Trigger (Matches NotFound button styling) */}
-              <div className="flex items-center justify-start pt-6 border-t border-gray-200/40 dark:border-white/5 mt-4">
+              {/* CTA Action Submission Trigger */}
+              <div className="flex items-center justify-start pt-6 border-t border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4">
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-10 h-12 inline-flex items-center justify-center text-xs font-bold tracking-wider uppercase bg-[#124170] dark:bg-[#67C090] text-[#AAFFC7] dark:text-[#124170] rounded-full shadow-md dark:shadow-none transition-all duration-300 hover:opacity-90 active:scale-[0.985] select-none"
+                  className="w-full sm:w-auto px-10 h-12 inline-flex items-center justify-center text-xs font-bold tracking-wider uppercase bg-[#124170] dark:bg-[#67C090] text-white dark:text-[#124170] rounded-full shadow-md dark:shadow-none transition-all duration-300 hover:opacity-90 active:scale-[0.985] select-none"
                   radius="full"
                 >
                   {isSubmitting ? "Creating System Node..." : "Add Ticket"}
@@ -441,9 +441,9 @@ const AddTicketPage = () => {
         </Card>
       </div>
 
-      {/* Decorative Background Ambient Orbs matching NotFound aesthetics */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#AAFFC7]/10 dark:bg-[#215B63]/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#67C090]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Decorative Background Ambient Orbs */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#AAFFC7]/10 dark:bg-[#67C090]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#AAFFC7]/5 rounded-full blur-3xl pointer-events-none" />
     </div>
   );
 };

@@ -19,7 +19,6 @@ import logoDark from "../../../public/assets/logo-dark.png";
 import { useTheme } from "next-themes";
 import ThemeToggle from "../ThemeToggle";
 import { FaMoneyBillTrendUp, FaTicket } from "react-icons/fa6";
-import { GrOverview } from "react-icons/gr";
 import { MdFactCheck } from "react-icons/md";
 import { LuTicketsPlane } from "react-icons/lu";
 import { RiAdvertisementFill } from "react-icons/ri";
@@ -146,8 +145,8 @@ const DashboardSidebar = () => {
         <div className="absolute -top-40 -left-40 w-80 h-80 bg-[#AAFFC7]/10 dark:bg-[#215B63]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-[#67C090]/10 dark:bg-[#67C090]/5 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Top Header/Action Strip (Only handles toggle switch logic on Desktop) */}
-        <div className="h-20 px-4 border-b border-black/5 dark:border-white/5 relative z-10 flex items-center justify-between gap-20 overflow-hidden shrink-0">
+        {/* Top Header/Action Strip */}
+        <div className="h-20 px-6 border-b border-black/5 dark:border-white/5 relative z-10 flex items-center justify-between gap-4 overflow-hidden shrink-0">
           <div
             className={`flex items-center gap-3 transition-opacity duration-200 ${showExpandedState ? "" : "hidden"}`}
           >
@@ -167,16 +166,16 @@ const DashboardSidebar = () => {
             onClick={() =>
               isMobileView ? setIsMobileOpen(false) : setIsExpanded(!isExpanded)
             }
-            className="p-3 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all cursor-pointer text-sm mx-auto"
+            className={`p-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-xl bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-all cursor-pointer text-sm ${!showExpandedState ? "mx-auto" : ""}`}
           >
-            {isMobileView ? <FaTimes /> : <FaBars />}
+            {isMobileView ? <FaTimes size={14} /> : <FaBars size={14} />}
           </button>
         </div>
 
         {/* User Profile Slot */}
         <div className="p-4 border-b border-black/5 dark:border-white/5 relative z-10 shrink-0 overflow-hidden">
           <div
-            className={`flex items-center ${showExpandedState ? "gap-3 justify-start" : "justify-center"}`}
+            className={`flex items-center ${showExpandedState ? "gap-3 justify-start px-2" : "justify-center"}`}
           >
             <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#67C090]/60 shrink-0">
               <Image
@@ -287,8 +286,8 @@ const DashboardSidebar = () => {
 
   return (
     <>
-      {/* 1. Mobile Top Header Navbar (Hidden on lg screens) */}
-      <div className="lg:hidden w-full bg-white dark:bg-slate-950 border-b border-black/5 dark:border-white/5 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+      {/* 1. Mobile Top Header Navbar (Fixed, sticky with background treatment handling light/dark modes) */}
+      <div className="lg:hidden w-full bg-white dark:bg-[#124170] border-b border-black/5 dark:border-white/5 px-6 py-4 flex items-center justify-between sticky top-0 z-40 class-transition">
         <Link href="/" className="block">
           <Image
             src={currentLogo}
@@ -307,9 +306,9 @@ const DashboardSidebar = () => {
         </button>
       </div>
 
-      {/* 2. Desktop Thin Expandable Sidebar Strip Layout (Hidden on Mobile) */}
+      {/* 2. Desktop Thin Expandable Sidebar Strip Layout */}
       <aside
-        className={`hidden lg:flex h-screen sticky top-0 left-0 z-40 flex-col bg-white/90 dark:bg-slate-950/90 border-r border-black/5 dark:border-white/5 backdrop-blur-xl transition-all duration-300 ease-in-out ${
+        className={`hidden lg:flex h-screen sticky top-0 left-0 z-40 flex-col bg-white dark:bg-slate-950/40 border-r border-black/5 dark:border-white/5 backdrop-blur-xl transition-all duration-300 ease-in-out shrink-0 ${
           isExpanded ? "w-64" : "w-20"
         }`}
       >
@@ -324,15 +323,15 @@ const DashboardSidebar = () => {
             : "opacity-0 pointer-events-none"
         }`}
       >
-        {/* Darkened blur background click interceptor panel */}
+        {/* Backdrop overlay panel */}
         <div
           className="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm"
           onClick={() => setIsMobileOpen(false)}
         />
 
-        {/* Sliding body content container pane */}
+        {/* Sliding panel content matching page color schema backgrounds */}
         <div
-          className={`relative w-64 max-w-xs h-full bg-white dark:bg-slate-950 border-r border-black/5 dark:border-white/5 transform transition-transform duration-300 ease-out z-10 ${
+          className={`relative w-64 max-w-xs h-full bg-white dark:bg-[#124170] border-r border-black/5 dark:border-white/5 transform transition-transform duration-300 ease-out z-10 ${
             isMobileOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
