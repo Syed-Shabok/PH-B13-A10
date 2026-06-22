@@ -3,8 +3,17 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "@/lib/auth-client";
-import { FaPlus, FaHome, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
+import { authClient, useSession } from "@/lib/auth-client";
+import {
+  FaPlus,
+  FaHome,
+  FaSignOutAlt,
+  FaBars,
+  FaTimes,
+  FaUserCircle,
+  FaMoneyCheck,
+  FaUsers,
+} from "react-icons/fa";
 import logoLight from "../../../public/assets/logo-light.png";
 import logoDark from "../../../public/assets/logo-dark.png";
 import { useTheme } from "next-themes";
@@ -12,6 +21,9 @@ import ThemeToggle from "../ThemeToggle";
 import { FaMoneyBillTrendUp, FaTicket } from "react-icons/fa6";
 import { GrOverview } from "react-icons/gr";
 import { MdFactCheck } from "react-icons/md";
+import { LuTicketsPlane } from "react-icons/lu";
+import { RiAdvertisementFill } from "react-icons/ri";
+import { useRouter } from "next/navigation";
 
 const DashboardSidebar = () => {
   const { data: session } = useSession();
@@ -19,49 +31,109 @@ const DashboardSidebar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const router = useRouter();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleLogout = () => {
-    // Implement sign-out logic here
+  const handleLogout = async () => {
+    await authClient.signOut();
+    router.push("/");
   };
 
   const vendorMenu = [
     {
-      key: "overview",
-      label: "Overview",
-      icon: GrOverview,
+      key: "vendor-profile",
+      label: "Profile",
+      icon: FaUserCircle,
       href: "/dashboard/vendor",
     },
     {
-      key: "Add Ticket",
+      key: "add-ticket",
       label: "Add Ticket",
       icon: FaPlus,
-      href: "/dashboard/vendor/Add Ticket",
+      href: "/dashboard/vendor/add-ticket",
     },
     {
-      key: "My Added Tickets",
+      key: "my-added-tickets",
       label: "My Added Tickets",
       icon: FaTicket,
-      href: "/dashboard/vendor/My Added Tickets",
+      href: "/dashboard/vendor/my-added-tickets",
     },
     {
-      key: "Requested Bookings",
+      key: "requested-bookings",
       label: "Requested Bookings",
       icon: MdFactCheck,
-      href: "/dashboard/vendor/Requested Bookings",
+      href: "/dashboard/vendor/requested-bookings",
     },
     {
-      key: "Revenue Overview",
+      key: "revenue-overview",
       label: "Revenue Overview",
       icon: FaMoneyBillTrendUp,
-      href: "/dashboard/vendor/Revenue Overview",
+      href: "/dashboard/vendor/revenue-overview",
     },
   ];
 
-  const role = session?.user?.role || "vendor";
+  const passengerMenu = [
+    {
+      key: "passenger-profile",
+      label: "Profile",
+      icon: FaUserCircle,
+      href: "/dashboard/passenger",
+    },
+    {
+      key: "my-booked-tickets",
+      label: "My Booked Tickets",
+      icon: LuTicketsPlane,
+      href: "/dashboard/passenger/my-booked-tickets",
+    },
+    {
+      key: "transaction-history",
+      label: "Transaction History",
+      icon: FaMoneyCheck,
+      href: "/dashboard/passenger/transaction-history",
+    },
+  ];
+
+  const adminMenu = [
+    {
+      key: "admin-profile",
+      label: "Profile",
+      icon: FaUserCircle,
+      href: "/dashboard/admin",
+    },
+    {
+      key: "manage-tickets",
+      label: "Manage Tickets",
+      icon: FaTicket,
+      href: "/dashboard/admin/manage-tickets",
+    },
+    {
+      key: "manage-users",
+      label: "Manage Users",
+      icon: FaUsers,
+      href: "/dashboard/admin/manage-users",
+    },
+    {
+      key: "advertise-tickets",
+      label: "Advertise Tickets",
+      icon: RiAdvertisementFill,
+      href: "/dashboard/admin/advertise-tickets",
+    },
+  ];
+
+  const role = session?.user?.role;
+
+  const menuItems =
+    role === "passenger"
+      ? passengerMenu
+      : role === "vendor"
+        ? vendorMenu
+        : role === "admin"
+          ? adminMenu
+          : [];
+
   const currentLogo = mounted && theme === "dark" ? logoDark : logoLight;
 
   // Shared internal sidebar structure
@@ -138,7 +210,7 @@ const DashboardSidebar = () => {
               Navigation
             </p>
           )}
-          {vendorMenu.map(({ key, label, icon: Icon, href }) => (
+          {menuItems.map(({ key, label, icon: Icon, href }) => (
             <Link
               key={key}
               href={href}

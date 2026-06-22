@@ -1,13 +1,13 @@
 import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 import React from "react";
 
-const Dashboardlayout = ({ children }) => {
+const DashboardLayout = ({ children }) => {
   return (
-    <div>
+    <div className="flex min-h-screen">
       <DashboardSidebar />
-      {children}
+      <div className="flex-1 overflow-auto">{children}</div>
     </div>
   );
 };
 
-export default Dashboardlayout;
+export default DashboardLayout;

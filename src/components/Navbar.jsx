@@ -45,7 +45,10 @@ const Navbar = () => {
   ];
 
   const allLinks = session
-    ? [...publicLinks, { label: "Dashboard", path: "/dashboard" }]
+    ? [
+        ...publicLinks,
+        { label: "Dashboard", path: `/dashboard/${session?.user?.role}` },
+      ]
     : publicLinks;
 
   const isActive = (path) => pathname === path;
