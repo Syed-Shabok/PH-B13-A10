@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useSession } from "@/lib/auth-client";
 import { addTickets } from "@/lib/actions/tickets";
 import { uploadImage } from "@/utils/uploadImage";
+import { motion } from "framer-motion";
 
 import { Button, Card, CardHeader, Input, Form, Label } from "@heroui/react";
 import { FaImage, FaPlane, FaBus, FaTrain, FaShip } from "react-icons/fa";
@@ -104,6 +105,29 @@ const AddTicketPage = () => {
     }
   };
 
+  // Motion Animation Presets
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
     // Base container updated from zinc-950 to a deep custom slate-navy tint
     <div className="min-h-[85vh] w-full bg-slate-50 dark:bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
@@ -113,20 +137,31 @@ const AddTicketPage = () => {
       />
 
       {/* Main Structural Content Glass Container applied to form wrapper */}
-      <div className="mt-8 relative z-10 flex flex-col items-start max-w-4xl mx-auto">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="mt-8 relative z-10 flex flex-col items-start max-w-4xl mx-auto w-full"
+      >
         <Card
           className="w-full bg-white/70 dark:bg-[#124170]/20 backdrop-blur-xl rounded-3xl border border-zinc-200/60 dark:border-[#1a3d61] shadow-2xl transition-all duration-300"
           radius="lg"
         >
           {/* Card Header matching project title aesthetics */}
           <CardHeader className="flex flex-col gap-1 pb-4 border-b border-zinc-200/60 dark:border-[#1a3d61]/60 p-8 select-none">
-            <h3 className="text-2xl font-black uppercase tracking-wider text-[#124170] dark:text-zinc-100">
+            <motion.h3
+              variants={itemVariants}
+              className="text-2xl font-black uppercase tracking-wider text-[#124170] dark:text-zinc-100"
+            >
               Issue Fleet Tickets
-            </h3>
-            <p className="text-xs font-semibold leading-relaxed text-zinc-500 dark:text-zinc-400 mt-1">
+            </motion.h3>
+            <motion.p
+              variants={itemVariants}
+              className="text-xs font-semibold leading-relaxed text-zinc-500 dark:text-zinc-400 mt-1"
+            >
               Provide travel details, pricing tier brackets, and upload
               promotional display assets. All fields are required.
-            </p>
+            </motion.p>
           </CardHeader>
 
           <div className="p-8">
@@ -135,7 +170,7 @@ const AddTicketPage = () => {
               className="space-y-6 w-full"
             >
               {/* Ticket Title */}
-              <div className="w-full">
+              <motion.div variants={itemVariants} className="w-full">
                 <Label
                   htmlFor="title"
                   className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
@@ -155,10 +190,13 @@ const AddTicketPage = () => {
                     {errors.title.message}
                   </p>
                 )}
-              </div>
+              </motion.div>
 
               {/* Transit Vectors (From -> To) */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+              >
                 <div>
                   <Label
                     htmlFor="from"
@@ -202,10 +240,13 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Transport Matrix + Time Profiles */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+              >
                 <div>
                   <Label
                     htmlFor="transportType"
@@ -265,10 +306,13 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Financial metrics & Inventory Controls */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+              >
                 <div>
                   <Label
                     htmlFor="price"
@@ -322,10 +366,13 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Perks Checklist Arrays */}
-              <div className="w-full border-t border-b border-zinc-200/60 dark:border-[#1a3d61]/80 py-6">
+              <motion.div
+                variants={itemVariants}
+                className="w-full border-t border-b border-zinc-200/60 dark:border-[#1a3d61]/80 py-6"
+              >
                 <Label className="text-sm font-black uppercase tracking-wider text-[#124170] dark:text-[#AAFFC7] block mb-4 select-none">
                   Included Amenities & Perks
                 </Label>
@@ -374,10 +421,10 @@ const AddTicketPage = () => {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Image Upload Component Box Container */}
-              <div className="w-full py-2">
+              <motion.div variants={itemVariants} className="w-full py-2">
                 <Label
                   htmlFor="ticketImage"
                   className="text-xs font-bold text-zinc-600 dark:text-zinc-400 mb-1.5 block select-none"
@@ -399,10 +446,13 @@ const AddTicketPage = () => {
                     {errors.ticketImage.message}
                   </p>
                 )}
-              </div>
+              </motion.div>
 
               {/* Readonly Vendor Verification Coordinates */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full bg-zinc-50 dark:bg-[#124170]/10 p-6 rounded-2xl border border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4 select-none">
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full bg-zinc-50 dark:bg-[#124170]/10 p-6 rounded-2xl border border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4 select-none"
+              >
                 <div>
                   <Label className="text-[10px] font-bold text-zinc-400 dark:text-zinc-500 tracking-wide uppercase block mb-1">
                     Vendor Name (Readonly)
@@ -423,10 +473,13 @@ const AddTicketPage = () => {
                     className="w-full h-10 px-4 rounded-xl bg-zinc-200/50 dark:bg-[#0b1d30]/60 border border-gray-300 dark:border-[#1B3C61] text-[#124170] dark:text-zinc-300 text-sm font-semibold opacity-70 cursor-not-allowed focus:outline-none transition-colors"
                   />
                 </div>
-              </div>
+              </motion.div>
 
               {/* CTA Action Submission Trigger */}
-              <div className="flex items-center justify-start pt-6 border-t border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4">
+              <motion.div
+                variants={itemVariants}
+                className="flex items-center justify-start pt-6 border-t border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4"
+              >
                 <Button
                   type="submit"
                   disabled={isSubmitting}
@@ -435,11 +488,11 @@ const AddTicketPage = () => {
                 >
                   {isSubmitting ? "Creating System Node..." : "Add Ticket"}
                 </Button>
-              </div>
+              </motion.div>
             </Form>
           </div>
         </Card>
-      </div>
+      </motion.div>
 
       {/* Decorative Background Ambient Orbs */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#AAFFC7]/10 dark:bg-[#67C090]/5 rounded-full blur-3xl pointer-events-none" />

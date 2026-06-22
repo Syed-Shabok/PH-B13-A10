@@ -7,3 +7,9 @@ export const addTickets = async (data) => {
 
   return resData;
 };
+
+export const updateTickets = async (data, id) => {
+  const resData = await serverMutation(`/api/tickets/${id}`, "PATCH", data);
+
+  return resData;
+};
