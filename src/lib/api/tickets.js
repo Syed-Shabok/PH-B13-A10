@@ -17,3 +17,8 @@ export const getUserMadeTickets = async (email) => {
 
   return result;
 };
+
+export const getTicketById = async (id) => {
+  const result = await serverFetch(`/api/tickets/${id}`);
+  return result;
+};

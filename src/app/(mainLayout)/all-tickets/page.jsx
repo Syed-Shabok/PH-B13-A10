@@ -23,7 +23,6 @@ export default async function AllTicketsPage({ searchParams }) {
 
       {/* Pass data to the Client Wrapper to handle filtering interactivity */}
       <AllTicketsClient tickets={tickets} filters={filterObj} />
-
       {/* Shared Aesthetic Accent Orbs */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#00ADB5]/10 dark:bg-[#124170]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#AAFFC7]/5 rounded-full blur-3xl pointer-events-none" />

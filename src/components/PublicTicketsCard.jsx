@@ -135,9 +135,7 @@ const PublicTicketCard = ({ ticket }) => {
             {/* Action CTA Button */}
             <motion.div whileTap={{ scale: 0.97 }}>
               <Button
-                onPress={() =>
-                  router.push(`/dashboard/all-tickets/${ticket?._id}`)
-                }
+                onPress={() => router.push(`/all-tickets/${ticket?._id}`)}
                 className="w-full font-bold text-xs uppercase tracking-wider bg-zinc-100 dark:bg-[#124170]/40 text-[#124170] dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-[#124170]/60 rounded-xl h-10 transition-all duration-200"
               >
                 View Details
