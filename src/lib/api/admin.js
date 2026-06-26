@@ -1,8 +1,10 @@
-import { serverFetch, serverMutation } from "../core/server";
+"use server";
+
+import { protectedFetch, serverMutation } from "../core/server";
 
 // --- Users ---
 export const getAllUsers = async () => {
-  return await serverFetch("/api/users");
+  return await protectedFetch("/api/users");
 };
 
 export const updateUserRole = async (id, role) => {
@@ -15,7 +17,7 @@ export const markVendorAsFraud = async (id) => {
 
 // --- Tickets ---
 export const getAllTicketsForAdmin = async () => {
-  return await serverFetch("/api/tickets/all");
+  return await protectedFetch("/api/tickets/all");
 };
 
 export const updateTicketStatus = async (id, status) => {

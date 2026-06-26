@@ -1,6 +1,7 @@
 import { getUserSession } from "@/lib/core/session";
 import DashboardHeading from "@/components/dashboard/DashboardHeading";
 import ProfileClient from "@/components/dashboard/ProfileClient";
+import { protectedFetch } from "@/lib/core/server";
 
 const ProfilePage = async () => {
   const session = await getUserSession();
@@ -8,11 +9,11 @@ const ProfilePage = async () => {
 
   if (session?.email) {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:5000"}/api/users/${session.email}`,
-        { cache: "no-store" },
-      );
-      dbUser = await res.json();
+      dbUser = await protectedFetch(`/api/users/${session.email}`);
+
+      if (dbUser?.error) {
+        dbUser = null;
+      }
     } catch (error) {
       console.error("Failed to fetch user profile:", error);
     }
@@ -34,9 +35,7 @@ const ProfilePage = async () => {
         title={`Welcome back, ${firstName}!`}
         description="View and manage your personal account settings and aesthetics."
       />
-
       <ProfileClient initialProfile={initialProfile} />
-
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#00ADB5]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#452C20]/10 rounded-full blur-3xl pointer-events-none" />
     </div>

@@ -1,7 +1,7 @@
-import { varifyRole } from "@/lib/core/session";
+import { verifyRole } from "@/lib/core/session";
 
 const AdminDashboardLayout = async ({ children }) => {
-  await varifyRole("vendor");
+  await verifyRole("vendor");
   return children;
 };
 

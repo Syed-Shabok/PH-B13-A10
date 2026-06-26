@@ -1,10 +1,12 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSession } from "@/lib/auth-client";
 import { addTickets } from "@/lib/actions/tickets";
+import { getUserProfile } from "@/lib/api/users"; // <-- Import the Server Action
 import { uploadImage } from "@/utils/uploadImage";
 import { motion } from "framer-motion";
 import { Button, Card, CardHeader, Input, Form, Label } from "@heroui/react";
@@ -48,10 +50,9 @@ const AddTicketPage = () => {
     const checkVendorStatus = async () => {
       if (session?.user?.email) {
         try {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${session.user.email}`,
-          );
-          const userData = await res.json();
+          // Use the Server Action instead of raw fetch to avoid Import Bleeds
+          const userData = await getUserProfile(session.user.email);
+
           if (userData?.isBlocked) {
             setIsVendorBlocked(true);
           }
@@ -64,7 +65,6 @@ const AddTicketPage = () => {
         setIsLoadingStatus(false); // Done loading session, user is not logged in
       }
     };
-
     checkVendorStatus();
   }, [session]);
 
@@ -174,7 +174,6 @@ const AddTicketPage = () => {
           title="Add Ticket"
           description="List and distribute custom transport or passage tickets."
         />
-
         <div className="mt-12 relative z-10 flex flex-col items-center justify-center p-10 md:p-16 border border-red-500/30 rounded-3xl bg-red-500/5 backdrop-blur-xl max-w-2xl mx-auto text-center shadow-[0_0_50px_-12px_rgba(239,68,68,0.15)]">
           <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-6 border border-red-500/20">
             <FaBan className="text-red-500 text-4xl" />
@@ -188,7 +187,6 @@ const AddTicketPage = () => {
             inventory on this platform.
           </p>
         </div>
-
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#091624] rounded-full blur-3xl pointer-events-none" />
       </div>
@@ -202,7 +200,6 @@ const AddTicketPage = () => {
         title="Add Ticket"
         description="List and distribute custom transport or passage tickets."
       />
-
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -228,7 +225,6 @@ const AddTicketPage = () => {
               promotional display assets. All fields are required.
             </motion.p>
           </CardHeader>
-
           <div className="p-8">
             <Form
               onSubmit={handleSubmit(onSubmit)}
@@ -255,7 +251,6 @@ const AddTicketPage = () => {
                   </p>
                 )}
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
@@ -281,7 +276,6 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-
                 <div>
                   <Label
                     htmlFor="to"
@@ -304,7 +298,6 @@ const AddTicketPage = () => {
                   )}
                 </div>
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
@@ -346,7 +339,6 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-
                 <div>
                   <Label
                     htmlFor="departureDateTime"
@@ -369,7 +361,6 @@ const AddTicketPage = () => {
                   )}
                 </div>
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
@@ -400,7 +391,6 @@ const AddTicketPage = () => {
                     </p>
                   )}
                 </div>
-
                 <div>
                   <Label
                     htmlFor="quantity"
@@ -428,7 +418,6 @@ const AddTicketPage = () => {
                   )}
                 </div>
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="w-full border-t border-b border-zinc-200/60 dark:border-[#1a3d61]/80 py-6"
@@ -480,7 +469,6 @@ const AddTicketPage = () => {
                   })}
                 </div>
               </motion.div>
-
               <motion.div variants={itemVariants} className="w-full py-2">
                 <Label
                   htmlFor="ticketImage"
@@ -504,7 +492,6 @@ const AddTicketPage = () => {
                   </p>
                 )}
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full bg-zinc-50 dark:bg-[#124170]/10 p-6 rounded-2xl border border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4 select-none"
@@ -530,7 +517,6 @@ const AddTicketPage = () => {
                   />
                 </div>
               </motion.div>
-
               <motion.div
                 variants={itemVariants}
                 className="flex items-center justify-start pt-6 border-t border-zinc-200/60 dark:border-[#1a3d61]/60 mt-4"
@@ -548,7 +534,6 @@ const AddTicketPage = () => {
           </div>
         </Card>
       </motion.div>
-
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#AAFFC7]/10 dark:bg-[#67C090]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#AAFFC7]/5 rounded-full blur-3xl pointer-events-none" />
     </div>
