@@ -1,4 +1,4 @@
-import { baseUrl } from "@/lib/core/server";
+import { serverMutation } from "@/lib/core/server"; // <-- Import the secure mutation wrapper
 import { stripe } from "@/lib/stripe";
 import { Button, Card, CardFooter, CardHeader } from "@heroui/react";
 import Link from "next/link";
@@ -26,15 +26,17 @@ export default async function PaymentSuccessfulPage({ searchParams }) {
     paymentStatus: session?.payment_status,
   };
 
-  // Process the payment on your backend
-  const res = await fetch(`${baseUrl}/api/bookings/payments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(paymentData),
-  });
-  const data = await res.json();
+  // Securely process the payment on your backend using the token
+  const data = await serverMutation(
+    "/api/bookings/payments",
+    "POST",
+    paymentData,
+  );
+
+  // Optional: Handle the case where the payment was already logged or failed
+  if (data?.error) {
+    console.error("Failed to log payment securely:", data);
+  }
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
@@ -82,7 +84,6 @@ export default async function PaymentSuccessfulPage({ searchParams }) {
                   {session?.customer_email}
                 </span>
               </div>
-
               <div className="flex justify-between items-center">
                 <span className="text-[11px] uppercase tracking-wider font-bold text-zinc-500">
                   Reserved Seats
@@ -91,7 +92,6 @@ export default async function PaymentSuccessfulPage({ searchParams }) {
                   {session?.metadata?.quantity || 1} Ticket(s)
                 </span>
               </div>
-
               <div className="flex justify-between items-center">
                 <span className="text-[11px] uppercase tracking-wider font-bold text-zinc-500">
                   Transaction ID

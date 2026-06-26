@@ -7,5 +7,5 @@ export const getVendorBookings = async (email) => {
 };
 
 export const getPassengerBookings = async (email) => {
-  return await serverFetch(`/api/bookings/passenger/${email}`);
+  return await protectedFetch(`/api/bookings/passenger/${email}`);
 };
