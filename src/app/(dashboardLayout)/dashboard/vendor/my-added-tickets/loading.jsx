@@ -2,7 +2,7 @@ import DashboardHeading from "@/components/dashboard/DashboardHeading";
 
 const AddedTicketsLoadingPage = () => {
   return (
-    <div className="min-h-[85vh] w-full bg-slate-50 dark:bg-[#091624] px-6 py-12">
+    <div className="min-h-screen w-full bg-slate-50 dark:bg-[#091624] px-6 py-12">
       <DashboardHeading
         title="My Added Tickets"
         description="Loading your ticket inventory..."
