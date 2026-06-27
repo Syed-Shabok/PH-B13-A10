@@ -12,7 +12,11 @@ export default async function AllTicketsPage({ searchParams }) {
   const queryString = querySearch.toString();
 
   // Fetch filtered tickets from the backend
-  const tickets = (await getAllTickets(queryString)) || [];
+  const resData = await getAllTickets(queryString);
+
+  // Safely extract from the new backend response structure
+  const tickets = resData?.tickets || [];
+  const total = resData?.total || 0;
 
   return (
     <div className="min-h-screen w-full bg-slate-50 dark:bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
@@ -21,8 +25,9 @@ export default async function AllTicketsPage({ searchParams }) {
         description="Browse available transport vectors, flight systems, and luxury cruise lines across the network."
       />
 
-      {/* Pass data to the Client Wrapper to handle filtering interactivity */}
-      <AllTicketsClient tickets={tickets} filters={filterObj} />
+      {/* Pass data and total to the Client Wrapper to handle filtering and pagination */}
+      <AllTicketsClient tickets={tickets} filters={filterObj} total={total} />
+
       {/* Shared Aesthetic Accent Orbs */}
       <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#00ADB5]/10 dark:bg-[#124170]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#AAFFC7]/5 rounded-full blur-3xl pointer-events-none" />
