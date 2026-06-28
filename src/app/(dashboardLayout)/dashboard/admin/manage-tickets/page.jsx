@@ -11,19 +11,17 @@ export default async function ManageTicketsPage() {
   }
 
   return (
-    <div className="p-6 relative overflow-hidden min-h-screen">
-      {/* Background Accent Orbs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00ADB5]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#AAFFC7]/5 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen w-full bg-slate-50 dark:bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
+      <DashboardHeading
+        title="Manage Tickets"
+        description="Review, approve, and reject transport vectors submitted by vendors across the network."
+      />
 
-      <div className="relative z-10">
-        <DashboardHeading
-          title="Manage Tickets"
-          description="Review, approve, and reject transport vectors submitted by vendors across the network."
-        />
+      <ManageTicketsClient initialTickets={tickets} />
 
-        <ManageTicketsClient initialTickets={tickets} />
-      </div>
+      {/* Background Accent Orbs adapted for global themes */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#00ADB5]/10 dark:bg-[#124170]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#67C090]/10 dark:bg-[#AAFFC7]/5 rounded-full blur-3xl pointer-events-none" />
     </div>
   );
 }

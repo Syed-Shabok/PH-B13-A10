@@ -21,17 +21,16 @@ export default async function AdvertiseTicketsPage() {
   );
 
   return (
-    <div className="p-6 relative overflow-hidden min-h-screen">
-      {/* Background Accent Orbs for Marketing Aesthetics */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00ADB5]/5 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen w-full bg-slate-50 dark:bg-[#091624] px-6 py-12 relative overflow-hidden transition-colors duration-300">
+      {/* Background Accent Orbs for Marketing Aesthetics aligned with example design */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-amber-500/10 dark:bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#00ADB5]/10 dark:bg-[#124170]/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10">
+      <div className="relative z-10 mx-auto w-full lg:px-10">
         <DashboardHeading
           title="Marketing & Advertisements"
           description="Control which vendor routes are featured on the public homepage. Maximum 6 slots available."
         />
-
         <AdvertiseTicketsClient initialTickets={eligibleTickets} />
       </div>
     </div>
