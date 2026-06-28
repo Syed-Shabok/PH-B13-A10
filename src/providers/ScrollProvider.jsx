@@ -2,15 +2,17 @@
 
 import React, { useEffect } from "react";
 import ReactLenis, { useLenis } from "lenis/react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollProvider({ children }) {
   const lenis = useLenis();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (lenis) {
       lenis.scrollTo(0, { immediate: true });
     }
-  }, [lenis]);
+  }, [lenis, pathname]);
 
   return (
     <ReactLenis
